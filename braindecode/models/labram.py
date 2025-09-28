@@ -737,6 +737,8 @@ class _PatchEmbed(nn.Module):
         x: torch.Tensor
             Output tensor of shape (Batch, n_patchs, patch_size, channels).
         """
+        if len(x.shape) == 3:
+            x = x.unsqueeze(0)
         x = self.proj(x)
         x = self.merge_transpose(x)
         return x
